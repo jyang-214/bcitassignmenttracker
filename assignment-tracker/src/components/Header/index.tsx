@@ -3,19 +3,30 @@
 import styles from "./header.module.css";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
+import { Assignment } from "../Assignment/index";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
 	inputValue: string;
-	setInputValue: () => void;
+	setInputValue: (input: string) => void;
+	assignments: Assignment[];
+	setAssignments: (assignments: Assignment[]) => void;
 }
 
-export function Header({ inputValue, setInputValue }: Props) {
+export function Header({
+	inputValue,
+	setInputValue,
+	assignments,
+	setAssignments,
+}: Props) {
 	function handleInputChange(event: { target: { value: string } }) {
-		setInputValue(event.target.value.trim());
+		setInputValue(event.target.value);
 	}
 
 	function handleCreateClick() {
-		console.log({ inputValue });
+		const newAssignment = { id: uuidv4(), title: inputValue };
+		setAssignments([...assignments, newAssignment]);
+		setInputValue("");
 	}
 
 	return (
@@ -32,7 +43,7 @@ export function Header({ inputValue, setInputValue }: Props) {
 				<button
 					type="button"
 					onClick={handleCreateClick}
-					disabled={inputValue === "" || /^\s*$/.test(inputValue)}
+					disabled={inputValue.trim() === ""}
 				>
 					Create <AiOutlinePlusCircle size={20} />
 				</button>
