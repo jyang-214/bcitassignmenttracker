@@ -17,10 +17,18 @@ function App() {
 		// third method
 		// setAssignments(assignments.slice().concat(newAssignment));
 	};
+
+	const deleteAssignment = (title: string) =>
+		setAssignments(
+			assignments.filter((assignment) => assignment.title != title)
+		);
 	return (
 		<>
 			<Header addAssignment={addAssignment} />
-			<Assignments assignments={assignments} />
+			<Assignments
+				assignments={assignments}
+				deleteAssignment={deleteAssignment}
+			/>
 		</>
 	);
 }

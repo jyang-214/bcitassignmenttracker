@@ -4,8 +4,9 @@ import styles from "./assignments.module.css";
 
 interface Props {
 	assignments: IAssignment[];
+	deleteAssignment: (title: string) => void;
 }
-export function Assignments({ assignments }: Props) {
+export function Assignments({ assignments, deleteAssignment }: Props) {
 	const completedAssignments = assignments.filter((a) => a.completed).length;
 	const numberOfAssignments = assignments.length;
 	return (
@@ -26,7 +27,10 @@ export function Assignments({ assignments }: Props) {
 
 			<div className={styles.list}>
 				{assignments.map((assignment) => (
-					<Assignment {...assignment} /> // ... spread operator
+					<Assignment
+						{...assignment}
+						deleteAssignment={deleteAssignment}
+					/> // ... spread operator
 				))}
 			</div>
 		</section>
