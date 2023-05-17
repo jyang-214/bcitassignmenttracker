@@ -1,18 +1,21 @@
+import IAssignment from "../../interfaces/IAssignment";
 import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
 
-export function Assignment() {
-  return (
-    <div className={styles.assignment}>
-      <button className={styles.checkContainer}>
-        <div />
-      </button>
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Props extends IAssignment {}
+export function Assignment({ title, completed }: Props) {
+	return (
+		<div className={styles.assignment}>
+			<button className={styles.checkContainer}>
+				<div />
+			</button>
 
-      <p>Some Title</p>
+			<p>{title}</p>
 
-      <button className={styles.deleteButton}>
-        <TbTrash size={20} />
-      </button>
-    </div>
-  );
+			<button className={styles.deleteButton}>
+				<TbTrash size={20} />
+			</button>
+		</div>
+	);
 }
