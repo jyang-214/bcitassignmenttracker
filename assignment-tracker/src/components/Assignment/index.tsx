@@ -21,7 +21,7 @@ export function Assignment({ id, title, onDelete, onComplete }: Props) {
 
 	function handleDeleteClick() {
 		onDelete(id, completed);
-		handleToggleClick();
+		// handleToggleClick();
 	}
 
 	return (
