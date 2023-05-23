@@ -4,8 +4,13 @@ import { useState } from "react";
 import { assignmentData } from "./database";
 function App() {
 	const [assignments, setAssignments] = useState(assignmentData); // assignments is read-only
-	const addAssignment = (title: string) => {
-		const newAssignment = { title, completed: false };
+	const [selectedDate, setSelectedDate] = useState<Date>();
+	const addAssignment = (title: string, deadline: Date) => {
+		const newAssignment = {
+			title,
+			completed: false,
+			deadline: selectedDate,
+		};
 		// first method, React way
 		setAssignments([...assignments, newAssignment]);
 
@@ -24,10 +29,16 @@ function App() {
 		);
 	return (
 		<>
-			<Header addAssignment={addAssignment} />
+			<Header
+				addAssignment={addAssignment}
+				selected={selectedDate}
+				setSelected={setSelectedDate}
+			/>
 			<Assignments
 				assignments={assignments}
 				deleteAssignment={deleteAssignment}
+				selected={selectedDate}
+				setSelected={setSelectedDate}
 			/>
 		</>
 	);

@@ -5,8 +5,16 @@ import styles from "./assignments.module.css";
 interface Props {
 	assignments: IAssignment[];
 	deleteAssignment: (title: string) => void;
+	selected: Date;
+	setSelected: (date: Date) => void;
 }
-export function Assignments({ assignments, deleteAssignment }: Props) {
+export function Assignments({
+	assignments,
+	deleteAssignment,
+	selected,
+	setSelected,
+}: Props) {
+	console.log(assignments.filter((a) => a.completed === true).length);
 	const completedAssignments = assignments.filter((a) => a.completed).length;
 	const numberOfAssignments = assignments.length;
 	return (
@@ -30,6 +38,8 @@ export function Assignments({ assignments, deleteAssignment }: Props) {
 					<Assignment
 						{...assignment}
 						deleteAssignment={deleteAssignment}
+						selected={selected}
+						setSelected={setSelected}
 					/> // ... spread operator
 				))}
 			</div>
